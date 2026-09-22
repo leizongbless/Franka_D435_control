@@ -16,7 +16,7 @@ class FrankaEnv:
     def __init__(
         self,
         action_scales=[0.04, 0.1, 20],
-        server_url="http://192.168.1.11:5000/",
+        server_url="http://192.168.1.11:8000/",
         gripper_min=0.0,
         gripper_max=255.0,
     ):

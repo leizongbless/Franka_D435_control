@@ -1,12 +1,12 @@
 # Shared SpaceMouse/Franka teleoperation settings.
 # Edit this file for hardware tuning; pass another file with --config when needed.
 
-server_url: http://192.168.1.11:5000/
+server_url: http://192.168.1.11:8000/
 position_scale: 0.10
 rotation_scale: 0.20
-gripper_step: 40.0
+gripper_step: 0.005
 gripper_min: 0.0
-gripper_max: 255.0
+gripper_max: 0.08
 deadzone: 0.30
 control_hz: 20.0
 reset_on_start: false

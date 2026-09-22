@@ -57,7 +57,7 @@ class Franka:
     def __init__(
         self,
         action_scales=[0.04, 0.1, 20],
-        server_url="http://192.168.1.11:5000/",
+        server_url="http://192.168.1.11:8000/",
         gripper_min=0.0,
         gripper_max=255.0,
     ):
@@ -65,6 +65,8 @@ class Franka:
 
         # get state
         self.url = server_url.rstrip("/") + "/"
+        self.api_v1 = self.url.rstrip("/").endswith(":8000") or "/api/v1" in self.url
+        self.command_duration_s = 0.04
 
         self.resetpos = np.concatenate([RESET_POSE[:3], euler_2_quat(RESET_POSE[3:])])
         self.currpos = self.resetpos.copy() # [x,y,z,qx,qy,qz,qw]
@@ -209,16 +211,22 @@ class Franka:
         self.nextpos[3:] = next_euler_pos
 
         
-        if gripper_flag in (1, -1):
+        gripper_commanded = gripper_flag in (1, -1)
+        if gripper_commanded:
             # Button input is a direction. Accumulate it from the current
             # server position so holding a button produces continuous motion.
             self.move_gripper_delta(
                 gripper_flag * self.action_scales[-1],
                 update_state=False,
             )
-        response = self._send_pos_command(self.clip_safety_box(self.nextpos))
+        # The v1 command manager permits only one active command. A gripper
+        # request and a Cartesian request cannot be accepted in the same
+        # control tick, so give the held gripper button priority for that tick.
+        response = None
+        if not (self.api_v1 and gripper_commanded):
+            response = self._send_pos_command(self.clip_safety_box(self.nextpos))
         if np.any(np.abs(np.asarray(xyzrpy)) > 1e-6):
-            print(f"[机器人调试] pose status={response.status_code}")
+            print(f"[机器人调试] pose status={response.status_code if response is not None else 'deferred'}")
 
         self._update_currpos()
 
@@ -335,11 +343,17 @@ class Franka:
         if abs(target - current) <= 1e-12:
             return False
 
-        response = requests.post(
-            self.url + "move_gripper",
-            headers={"Content-Type": "application/json"},
-            json={"gripper_pos": target},
-        )
+        if self.api_v1:
+            response = requests.post(
+                self.url.rstrip("/") + "/api/v1/gripper/move",
+                json={"width_m": target, "speed_m_s": 0.2}, timeout=5,
+            )
+        else:
+            response = requests.post(
+                self.url + "move_gripper",
+                headers={"Content-Type": "application/json"},
+                json={"gripper_pos": target},
+            )
         response.raise_for_status()
         self.next_gripper_pos = target
         if update_state:
@@ -347,12 +361,28 @@ class Franka:
         return True
 
     def open_gripper(self):
+        if self.api_v1:
+            response = requests.post(
+                self.url.rstrip("/") + "/api/v1/gripper/move",
+                json={"width_m": self.gripper_max, "speed_m_s": 0.2}, timeout=5,
+            )
+            response.raise_for_status()
+            self._update_currpos()
+            return
         response = requests.post(self.url + "open_gripper")
         print(f"[夹爪调试] 调用 open_gripper: status={response.status_code}, response={response.text}")
         response.raise_for_status()
         self._update_currpos()
 
     def close_gripper(self):
+        if self.api_v1:
+            response = requests.post(
+                self.url.rstrip("/") + "/api/v1/gripper/move",
+                json={"width_m": self.gripper_min, "speed_m_s": 0.2}, timeout=5,
+            )
+            response.raise_for_status()
+            self._update_currpos()
+            return
         response = requests.post(self.url + "close_gripper")
         print(f"[夹爪调试] 调用 close_gripper: status={response.status_code}, response={response.text}")
         response.raise_for_status()
@@ -360,20 +390,37 @@ class Franka:
 
     def move_gripper_absolute(self, position):
         position = float(np.clip(position, self.gripper_min, self.gripper_max))
-        response = requests.post(
-            self.url + "move_gripper",
-            headers={"Content-Type": "application/json"},
-            json={"gripper_pos": position},
-        )
+        if self.api_v1:
+            response = requests.post(
+                self.url.rstrip("/") + "/api/v1/gripper/move",
+                json={"width_m": position, "speed_m_s": 0.2}, timeout=5,
+            )
+        else:
+            response = requests.post(
+                self.url + "move_gripper",
+                headers={"Content-Type": "application/json"},
+                json={"gripper_pos": position},
+            )
         print(f"[夹爪调试] 下发绝对位置: gripper_pos={position}, status={response.status_code}")
         response.raise_for_status()
         self.next_gripper_pos = position
         self._update_currpos()
     
     def _send_pos_command(self, pos: np.ndarray):
-    
-        self._recover()
         arr = np.array(pos).astype(np.float32)
+        if self.api_v1:
+            response = requests.post(
+                self.url.rstrip("/") + "/api/v1/motions/cartesian-pose",
+                json={
+                    "position_m": arr[:3].tolist(),
+                    "quaternion_xyzw": arr[3:].tolist(),
+                    "duration_s": self.command_duration_s,
+                }, timeout=5,
+            )
+            response.raise_for_status()
+            return response
+
+        self._recover()
         data = {"arr": arr.tolist()}
 
         
@@ -406,6 +453,31 @@ class Franka:
         requests.post(self.url + "clearerr")      
 
     def _update_currpos(self):
+        if self.api_v1:
+            response = requests.get(
+                self.url.rstrip("/") + "/api/v1/state", timeout=5
+            )
+            response.raise_for_status()
+            state = response.json()
+            robot = state["robot"]
+            pose = robot.get("gripper_pose") or robot.get("flange_pose")
+            if pose is None:
+                raise RuntimeError("upper computer returned no Cartesian pose")
+            self.currpos[:] = np.asarray(
+                [*pose["position_m"], *pose["quaternion_xyzw"]], dtype=float
+            )
+            self.q[:] = np.asarray(robot.get("joint_position_rad", self.q), dtype=float)
+            self.dq[:] = np.asarray(robot.get("joint_velocity_rad_s", self.dq), dtype=float)
+            gripper = state.get("gripper") or {}
+            if gripper.get("width_m") is not None:
+                self.curr_gripper_pos = float(gripper["width_m"])
+            self.gripper_effort = None
+            self.force = np.zeros(3, dtype=float)
+            self.jacobian = np.zeros((6, 7), dtype=float)
+            self.torque = np.zeros(3, dtype=float)
+            self.vel = np.asarray(self.dq[:6], dtype=float)
+            return
+
         ps = requests.post(self.url + 'getstate').json()
         self.currpos[:] = np.array(ps["pose"])
 

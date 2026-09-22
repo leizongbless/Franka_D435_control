@@ -29,19 +29,15 @@ two `1280x720@30` RGB+depth streams. The legacy NPZ collector uses the separate
 
 ## Franka upper-computer service
 
-The current upper computer at `192.168.1.11` exposes a Flask HTTP service on
-port `5000`. The toolkit uses these `POST` endpoints:
+The current upper computer at `192.168.1.11` exposes a FastAPI service on
+port `8000`. The toolkit uses the `/api/v1` endpoints:
 
 | Endpoint | Payload | Purpose |
 | --- | --- | --- |
-| `/getstate` | none | Read pose, joints, velocities, gripper position, and telemetry |
-| `/pose` | `{"arr": [x, y, z, qx, qy, qz, qw]}` | Send Cartesian pose |
-| `/move_gripper` | `{"gripper_pos": number}` | Send an absolute gripper position |
-| `/open_gripper` | none | Open the gripper |
-| `/close_gripper` | none | Close the gripper |
-| `/clearerr` | none | Clear the robot error state |
-| `/set_joint_target` | `{"target": [7 joint values]}` | Send a joint target |
-| `/jointreset` | none | Reset the robot joints |
+| `/api/v1/state` | none (`GET`) | Read robot and gripper state |
+| `/api/v1/motions/cartesian-pose` | position, `xyzw` quaternion, duration (`POST`) | Send Cartesian gripper pose |
+| `/api/v1/gripper/move` | `width_m`, `speed_m_s` (`POST`) | Send gripper width in meters |
+| `/api/v1/stop` | none (`POST`) | Stop the active command |
 
 The current `/getstate` response includes `pose`, `q`, `dq`, `gripper_pos`,
 `force`, `jacobian`, `torque`, and `vel`. The client keeps the optional

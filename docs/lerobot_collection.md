@@ -24,7 +24,7 @@ python -m franka_toolkit.scripts.collection.collect_lerobot_d435 \
   --task "Put the object into the box" \
   --top-serial TOP_CAMERA_SERIAL \
   --wrist-serial WRIST_CAMERA_SERIAL \
-  --server-url http://192.168.1.11:5000/
+  --server-url http://192.168.1.11:8000/
 ```
 
 也可以把 `repo_id`、`task`、两个相机序列号、机器人地址和遥操作参数写入

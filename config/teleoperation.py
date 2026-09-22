@@ -11,12 +11,12 @@ DEFAULT_CONFIG_PATH = Path(__file__).resolve().parents[1] / "configs" / "teleope
 @dataclass(frozen=True)
 class TeleoperationConfig:
     # Robot and SpaceMouse control.
-    server_url: str = "http://192.168.1.11:5000/"
+    server_url: str = "http://192.168.1.11:8000/"
     position_scale: float = 0.10
     rotation_scale: float = 0.20
-    gripper_step: float = 40.0
+    gripper_step: float = 0.005
     gripper_min: float = 0.0
-    gripper_max: float = 255.0
+    gripper_max: float = 0.08
     deadzone: float = 0.30
     control_hz: float = 20.0
     reset_on_start: bool = False

@@ -68,11 +68,11 @@ python -m franka_toolkit.scripts.camera.view_two_realsense \
 需要彩色画面时，请将设备连接到 USB 3 端口并使用支持 USB 3 的数据线。
 
 程序默认不会在启动时复位。需要先复位再操作时显式添加
-`--reset-on-start`。机器人服务不是默认的 `192.168.1.11:5000` 时，可使用：
+`--reset-on-start`。机器人服务不是默认的 `192.168.1.11:8000` 时，可使用：
 
 ```bash
 python -m franka_toolkit.scripts.control.teleoperate_spacemouse \
-  --server-url http://ROBOT_IP:5000/
+  --server-url http://ROBOT_IP:8000/
 ```
 
 终端按键：`q` 退出、`r` 慢速复位、`p` 打印末端位姿、`j` 打印关节状态。
