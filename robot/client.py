@@ -66,7 +66,9 @@ class Franka:
         # get state
         self.url = server_url.rstrip("/") + "/"
         self.api_v1 = self.url.rstrip("/").endswith(":8000") or "/api/v1" in self.url
-        self.command_duration_s = 0.04
+        # Each HTTP command starts a new libfranka control session. Give the
+        # server enough time to interpolate between consecutive targets.
+        self.command_duration_s = 0.20
         self.last_command_id = None
         self.last_command_status = None
 
