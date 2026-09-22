@@ -33,7 +33,7 @@ class TeleoperationConfig:
     camera_fps: int = 30
 
     # Legacy NPZ collector.
-    legacy_camera_serial: str = "213322070221"
+    legacy_camera_serial: str = "261622077687"
     legacy_camera_width: int = 640
     legacy_camera_height: int = 480
     legacy_camera_fps: int = 30

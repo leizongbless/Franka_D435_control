@@ -27,7 +27,8 @@ camera_height: 720
 camera_fps: 30
 
 # Legacy NPZ collector (used with --legacy-npz).
-legacy_camera_serial: "213322070221"
+# Detected on 2026-09-22: Intel RealSense D435I.
+legacy_camera_serial: "261622077687"
 legacy_camera_width: 640
 legacy_camera_height: 480
 legacy_camera_fps: 30

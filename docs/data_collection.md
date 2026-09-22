@@ -164,7 +164,7 @@ actions = data["action_arrays"]
 通道: BGR
 ```
 
-图像来自序列号 `213322070221` 的 RealSense 彩色流，保持 `640 x 480` 原始分辨率，不经过插值。图像不是 RGB 通道顺序；如果使用 PIL、Matplotlib 或某些深度学习输入管线，通常需要先执行 BGR 到 RGB 的转换。
+图像来自序列号 `261622077687` 的 RealSense D435I 彩色流，保持 `640 x 480` 原始分辨率，不经过插值。图像不是 RGB 通道顺序；如果使用 PIL、Matplotlib 或某些深度学习输入管线，通常需要先执行 BGR 到 RGB 的转换。
 
 ### 7.2 `state_arrays`
 

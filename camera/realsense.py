@@ -60,8 +60,9 @@ class RSCapture:
         self.depth_scale = 0.001  
         
 
-        # self.intrinsics = self.d435i_intrinsics()
-        self.intrinsics = self.L515_intrinsics()
+        # The currently deployed device is a D435I.  Use its intrinsics rather
+        # than the old L515 calibration that was previously hard-coded here.
+        self.intrinsics = self.d435i_intrinsics()
 
         assert serial_number in self.get_device_serial_numbers()
         self.serial_number = serial_number
@@ -70,7 +71,7 @@ class RSCapture:
         self.pipe = rs.pipeline()
         self.cfg = rs.config()
         self.cfg.enable_device(self.serial_number)
-        self.cfg.enable_stream(rs.stream.color, dim[0], dim[1], rs.format.bgr8, 6)
+        self.cfg.enable_stream(rs.stream.color, dim[0], dim[1], rs.format.bgr8, fps)
         if self.depth:
             # pc = rs.pointcloud()  # 默认初始化
             self.pc = rs.pointcloud() 

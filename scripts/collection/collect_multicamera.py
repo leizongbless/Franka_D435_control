@@ -107,7 +107,7 @@ if __name__ == "__main__":
     
     # 目标摄像头序列号（现在管理所有三个）
     target_cameras = {
-        '213322070221': 'camera_1',  # 主摄像头，现在也用RealSense SDK
+        '261622077687': 'camera_1',  # 当前连接的 D435I 主摄像头
         '213622073689': 'camera_2',
         'f1371022': 'camera_3'
     }
@@ -146,25 +146,25 @@ if __name__ == "__main__":
         # 检查目标摄像头是否可用
         current_serials = detect_realsense_cameras()
         
-        # 初始化第一个摄像头 (213322070221)
-        if '213322070221' in current_serials:
+        # 初始化第一个摄像头 (261622077687)
+        if '261622077687' in current_serials:
             try:
-                print("正在初始化第一个摄像头 (213322070221)...")
+                print("正在初始化第一个摄像头 (261622077687)...")
                 pipeline_1 = rs.pipeline()
                 config_1 = rs.config()
-                config_1.enable_device('213322070221')
+                config_1.enable_device('261622077687')
                 config_1.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
                 
                 profile_1 = pipeline_1.start(config_1)
                 time.sleep(0.5)
                 
-                print("第一个摄像头 (213322070221) 初始化成功")
+                print("第一个摄像头 (261622077687) 初始化成功")
                 success_count += 1
             except Exception as e:
                 print(f"第一个摄像头初始化失败: {e}")
                 pipeline_1 = None
         else:
-            print("第一个摄像头 (213322070221) 不可用")
+            print("第一个摄像头 (261622077687) 不可用")
         
         # 初始化第二个摄像头 (213622073689)
         if '213622073689' in current_serials:

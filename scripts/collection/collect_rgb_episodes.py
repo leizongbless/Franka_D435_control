@@ -16,7 +16,7 @@ from franka_toolkit.camera import RSCapture
 from franka_toolkit.input import SpaceMouseExpert
 
 # ============== 配置 ==============
-CAMERA_SERIALS = ['135122078001', '213622073689', 'f1371022']
+CAMERA_SERIALS = ['261622077687', '213622073689', 'f1371022']
 CAMERA_DIM = (640, 480)
 CAMERA_FPS = 30
 # ==================================
