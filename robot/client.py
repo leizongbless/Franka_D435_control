@@ -67,6 +67,8 @@ class Franka:
         self.url = server_url.rstrip("/") + "/"
         self.api_v1 = self.url.rstrip("/").endswith(":8000") or "/api/v1" in self.url
         self.command_duration_s = 0.04
+        self.last_command_id = None
+        self.last_command_status = None
 
         self.resetpos = np.concatenate([RESET_POSE[:3], euler_2_quat(RESET_POSE[3:])])
         self.currpos = self.resetpos.copy() # [x,y,z,qx,qy,qz,qw]
@@ -226,7 +228,10 @@ class Franka:
         if not (self.api_v1 and gripper_commanded):
             response = self._send_pos_command(self.clip_safety_box(self.nextpos))
         if np.any(np.abs(np.asarray(xyzrpy)) > 1e-6):
-            print(f"[机器人调试] pose status={response.status_code if response is not None else 'deferred'}")
+            print(
+                f"[机器人调试] pose status={response.status_code if response is not None else 'deferred'} "
+                f"command={self.last_command_id} result={self.last_command_status}"
+            )
 
         self._update_currpos()
 
@@ -418,6 +423,7 @@ class Franka:
                 }, timeout=5,
             )
             response.raise_for_status()
+            self._check_v1_command(response)
             return response
 
         self._recover()
@@ -429,6 +435,33 @@ class Franka:
         response = requests.post(self.url + "pose", json=data)
         response.raise_for_status()
         return response
+
+    def _check_v1_command(self, response):
+        """Record the async command result and surface hardware failures."""
+        payload = response.json()
+        command_id = payload.get("command_id")
+        self.last_command_id = command_id
+        self.last_command_status = payload.get("status")
+        if not command_id:
+            return
+        deadline = time.monotonic() + self.command_duration_s + 0.15
+        terminal = {"succeeded", "failed", "stopped", "rejected"}
+        while time.monotonic() < deadline:
+            record_response = requests.get(
+                self.url.rstrip("/") + "/api/v1/commands/" + command_id,
+                timeout=2,
+            )
+            record_response.raise_for_status()
+            record = record_response.json()
+            self.last_command_status = record.get("status")
+            if self.last_command_status in terminal:
+                if self.last_command_status != "succeeded":
+                    detail = record.get("error_message") or record.get("error_code") or record
+                    raise RuntimeError(
+                        f"upper-computer command {command_id} {self.last_command_status}: {detail}"
+                    )
+                return
+            time.sleep(0.01)
 
     def _wait_for_pose(self, target_pose, timeout=5.0, position_tolerance=0.01, angle_tolerance=0.08):
         target_pose = np.asarray(target_pose, dtype=float)
