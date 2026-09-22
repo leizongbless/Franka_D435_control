@@ -80,6 +80,12 @@ class Franka:
         self.curr_gripper_pos = 0 # server-side raw position, normally 0-255
         self.next_gripper_pos = self.curr_gripper_pos
         self.gripper_binary_state = 0
+        # Optional telemetry exposed by the current upper-computer service.
+        self.force = np.zeros(3, dtype=float)
+        self.jacobian = np.zeros((6, 7), dtype=float)
+        self.torque = np.zeros(3, dtype=float)
+        self.vel = np.zeros(6, dtype=float)
+        self.gripper_effort = None
 
         self._update_currpos()
 
@@ -408,3 +414,13 @@ class Franka:
 
         self.curr_gripper_pos = np.array(ps["gripper_pos"])
         self.gripper_effort = ps.get("gripper_effort")
+        # Keep optional fields when available, while remaining compatible with
+        # older upper-computer responses that omit them.
+        if ps.get("force") is not None:
+            self.force = np.asarray(ps["force"], dtype=float)
+        if ps.get("jacobian") is not None:
+            self.jacobian = np.asarray(ps["jacobian"], dtype=float)
+        if ps.get("torque") is not None:
+            self.torque = np.asarray(ps["torque"], dtype=float)
+        if ps.get("vel") is not None:
+            self.vel = np.asarray(ps["vel"], dtype=float)
