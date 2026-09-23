@@ -1,0 +1,837 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="fr3">
+  <link name="base">
+      </link>
+  <joint name="fr3_base_joint" type="fixed">
+    <parent link="base" />
+    <child link="fr3_link0" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+  </joint>
+  <link name="fr3_link0">
+    <collision name="fr3_link0_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/link0.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.0172 0.0004 0.0745" />
+      <mass value="2.3966" />
+      <inertia ixx="0.009" ixy="0.0" ixz="0.002" iyy="0.0115" iyz="0.0" izz="0.0085" />
+    </inertial>
+    <visual name="visual_link0_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link0_0.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+    <visual name="visual_link0_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link0_1.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link0_2">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link0_2.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link0_3">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link0_3.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link0_4">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link0_4.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link0_5">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link0_5.obj" />
+      </geometry>
+      <material name="mj_red">
+        <color rgba="1 0.072272 0.039546 1" />
+      </material>
+    </visual>
+    <visual name="visual_link0_6">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link0_6.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="fr3_link0_accelerometer_top">
+      </link>
+  <joint name="fr3_link0_accelerometer_top_joint" type="fixed">
+    <origin rpy="3.1416 0.0 0.0" xyz="-0.017402 -0.007872 0.04715" />
+    <parent link="fr3_link0" />
+    <child link="fr3_link0_accelerometer_top" />
+  </joint>
+  <link name="fr3_link0_accelerometer_bottom">
+      </link>
+  <joint name="fr3_link0_accelerometer_bottom_joint" type="fixed">
+    <origin rpy="0.0 0.0 -1.5708" xyz="-0.019739 0.0015506 0.05075" />
+    <parent link="fr3_link0" />
+    <child link="fr3_link0_accelerometer_bottom" />
+  </joint>
+  <link name="fr3_link1">
+    <collision name="fr3_link1_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/link1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0000004128 -0.0181251324 -0.0386035970" />
+      <mass value="2.9274653454" />
+      <inertia ixx="0.023927316485107913" ixy="1.3317903455714081e-05" ixz="-0.00011404774918616684" iyy="0.0224821613275756" iyz="-0.0019950320628240115" izz="0.006350098258530016" />
+    </inertial>
+    <visual name="visual_link1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link1.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="fr3_link1_accelerometer_top">
+      </link>
+  <joint name="fr3_link1_accelerometer_top_joint" type="fixed">
+    <origin rpy="-1.5708 0.0 3.1416" xyz="0.017402 -0.093352 -0.00787" />
+    <parent link="fr3_link1" />
+    <child link="fr3_link1_accelerometer_top" />
+  </joint>
+  <link name="fr3_link1_accelerometer_bottom">
+      </link>
+  <joint name="fr3_link1_accelerometer_bottom_joint" type="fixed">
+    <origin rpy="-1.5708 1.5708 0.0" xyz="0.01974 -0.08975 0.00155" />
+    <parent link="fr3_link1" />
+    <child link="fr3_link1_accelerometer_bottom" />
+  </joint>
+  <joint name="fr3_joint1" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0.333" />
+    <parent link="fr3_link0" />
+    <child link="fr3_link1" />
+    <axis xyz="0 0 1" />
+    <limit effort="87.0" lower="-2.9007" upper="2.9007" velocity="2.62" />
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.9007" soft_upper_limit="2.9007" />
+    <position_based_velocity_limits deceleration_limit="6.0" velocity_offset="0.652" />
+    <dynamics D="1" K="7000" damping="0.003" friction="0.2" gear_ratio="120.0" motor_inertia="4.206399e-05" mu_coulomb="0" mu_viscous="16" />
+  </joint>
+  <link name="fr3_link2">
+    <collision name="fr3_link2_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/link2.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0031828864 -0.0743221644 0.0088146084" />
+      <mass value="2.9355370338" />
+      <inertia ixx="0.041938946257609425" ixy="0.00020257331521090626" ixz="0.004077784227179924" iyy="0.02514514885014724" iyz="-0.0042252158006570156" izz="0.06170214472888839" />
+    </inertial>
+    <visual name="visual_link2">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link2.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="fr3_link2_accelerometer_top">
+      </link>
+  <joint name="fr3_link2_accelerometer_top_joint" type="fixed">
+    <origin rpy="1.5708 0.0 3.1416" xyz="0.017403 -0.11715 0.00787" />
+    <parent link="fr3_link2" />
+    <child link="fr3_link2_accelerometer_top" />
+  </joint>
+  <link name="fr3_link2_accelerometer_bottom">
+      </link>
+  <joint name="fr3_link2_accelerometer_bottom_joint" type="fixed">
+    <origin rpy="1.5708 -1.5708 0.0" xyz="0.019737 -0.11875 -0.00155" />
+    <parent link="fr3_link2" />
+    <child link="fr3_link2_accelerometer_bottom" />
+  </joint>
+  <joint name="fr3_joint2" type="revolute">
+    <origin rpy="-1.570796326794897 0 0" xyz="0 0 0" />
+    <parent link="fr3_link1" />
+    <child link="fr3_link2" />
+    <axis xyz="0 0 1" />
+    <limit effort="87.0" lower="-1.8361" upper="1.8361" velocity="2.62" />
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-1.8361" soft_upper_limit="1.8361" />
+    <position_based_velocity_limits deceleration_limit="2.585" velocity_offset="0.25" />
+    <dynamics D="1" K="7000" damping="0.003" friction="0.2" gear_ratio="120.0" motor_inertia="4.206399e-05" mu_coulomb="0" mu_viscous="16" />
+  </joint>
+  <link name="fr3_link3">
+    <collision name="fr3_link3_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/link3.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0407015686 -0.0048200565 -0.0289730823" />
+      <mass value="2.2449013699" />
+      <inertia ixx="0.02410142547240885" ixy="0.002404694559042109" ixz="-0.002856269270114313" iyy="0.01974053266708178" iyz="-0.002104212683891874" izz="0.019044494482244823" />
+    </inertial>
+    <visual name="visual_link3_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link3_0.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link3_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link3_1.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="fr3_link3_accelerometer_top">
+      </link>
+  <joint name="fr3_link3_accelerometer_top_joint" type="fixed">
+    <origin rpy="-1.5708 0.0 0.0" xyz="0.065099 0.077352 -0.00787" />
+    <parent link="fr3_link3" />
+    <child link="fr3_link3_accelerometer_top" />
+  </joint>
+  <link name="fr3_link3_accelerometer_bottom">
+      </link>
+  <joint name="fr3_link3_accelerometer_bottom_joint" type="fixed">
+    <origin rpy="1.5708 1.5708 0.0" xyz="0.062769 0.073756 0.00155" />
+    <parent link="fr3_link3" />
+    <child link="fr3_link3_accelerometer_bottom" />
+  </joint>
+  <joint name="fr3_joint3" type="revolute">
+    <origin rpy="1.570796326794897 0 0" xyz="0 -0.316 0" />
+    <parent link="fr3_link2" />
+    <child link="fr3_link3" />
+    <axis xyz="0 0 1" />
+    <limit effort="87.0" lower="-2.9007" upper="2.9007" velocity="2.62" />
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.9007" soft_upper_limit="2.9007" />
+    <position_based_velocity_limits deceleration_limit="3.5" velocity_offset="0.2005" />
+    <dynamics D="1" K="7000" damping="0.003" friction="0.2" gear_ratio="120.0" motor_inertia="3.211626e-05" mu_coulomb="0" mu_viscous="16" />
+  </joint>
+  <link name="fr3_link4">
+    <collision name="fr3_link4_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/link4.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.0459100965 0.0630492960 -0.0085187868" />
+      <mass value="2.6155955791" />
+      <inertia ixx="0.03452998321913202" ixy="0.01322552265982813" ixz="0.01015142998484113" iyy="0.028881621933049058" iyz="-0.0009762833870704552" izz="0.04125471171146641" />
+    </inertial>
+    <visual name="visual_link4_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link4_0.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link4_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link4_1.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="fr3_link4_accelerometer_top">
+      </link>
+  <joint name="fr3_link4_accelerometer_top_joint" type="fixed">
+    <origin rpy="-1.5708 0.0 -3.1416" xyz="-0.0651 0.046252 -0.00787" />
+    <parent link="fr3_link4" />
+    <child link="fr3_link4_accelerometer_top" />
+  </joint>
+  <link name="fr3_link4_accelerometer_bottom">
+      </link>
+  <joint name="fr3_link4_accelerometer_bottom_joint" type="fixed">
+    <origin rpy="-1.5708 1.5708 0.0" xyz="-0.062775 0.049753 0.00155" />
+    <parent link="fr3_link4" />
+    <child link="fr3_link4_accelerometer_bottom" />
+  </joint>
+  <joint name="fr3_joint4" type="revolute">
+    <origin rpy="1.570796326794897 0 0" xyz="0.0825 0 0" />
+    <parent link="fr3_link3" />
+    <child link="fr3_link4" />
+    <axis xyz="0 0 1" />
+    <limit effort="87.0" lower="-3.077" upper="-0.1169" velocity="2.62" />
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-3.077" soft_upper_limit="-0.1169" />
+    <position_based_velocity_limits deceleration_limit="4.0" velocity_offset="0.3542" />
+    <dynamics D="1" K="7000" damping="0.003" friction="0.2" gear_ratio="120.0" motor_inertia="3.211626e-05" mu_coulomb="0" mu_viscous="16" />
+  </joint>
+  <link name="fr3_link5">
+    <collision name="fr3_link5_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/link5.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.0016039605 0.0292536262 -0.0972965990" />
+      <mass value="2.3271207594" />
+      <inertia ixx="0.051610278463662895" ixy="-0.005715173387783472" ixz="-0.0035673167625872135" iyy="0.04787729713371481" iyz="0.010673985108535986" izz="0.016423625579357254" />
+    </inertial>
+    <visual name="visual_link5_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link5_0.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link5_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link5_1.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link5_2">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link5_2.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="fr3_link5_accelerometer_top">
+      </link>
+  <joint name="fr3_link5_accelerometer_top_joint" type="fixed">
+    <origin rpy="-1.5708 0.0 0.0" xyz="-0.017363 0.085872 -0.00795" />
+    <parent link="fr3_link5" />
+    <child link="fr3_link5_accelerometer_top" />
+  </joint>
+  <link name="fr3_link5_accelerometer_bottom">
+      </link>
+  <joint name="fr3_link5_accelerometer_bottom_joint" type="fixed">
+    <origin rpy="1.5708 1.5708 0.0" xyz="-0.019742 0.082275 0.00146" />
+    <parent link="fr3_link5" />
+    <child link="fr3_link5_accelerometer_bottom" />
+  </joint>
+  <joint name="fr3_joint5" type="revolute">
+    <origin rpy="-1.570796326794897 0 0" xyz="-0.0825 0.384 0" />
+    <parent link="fr3_link4" />
+    <child link="fr3_link5" />
+    <axis xyz="0 0 1" />
+    <limit effort="12.0" lower="-2.8763" upper="2.8763" velocity="5.26" />
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8763" soft_upper_limit="2.8763" />
+    <position_based_velocity_limits deceleration_limit="17.0" velocity_offset="0.5738" />
+    <dynamics D="1" K="7000" damping="0.003" friction="0.2" gear_ratio="80.0" motor_inertia="3.211626e-05" mu_coulomb="0" mu_viscous="16" />
+  </joint>
+  <link name="fr3_link6">
+    <collision name="fr3_link6_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/link6.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0597131221 -0.0410294666 -0.0101692726" />
+      <mass value="1.8170376524" />
+      <inertia ixx="0.005412333594383447" ixy="0.006193456360285834" ixz="0.0014219289306117652" iyy="0.014058329545509979" iyz="-0.0013140753741120031" izz="0.016080817924212554" />
+    </inertial>
+    <visual name="visual_link6_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link6_0.obj" />
+      </geometry>
+      <material name="mj_button_green">
+        <color rgba="0.102241 0.571125 0.102242 1" />
+      </material>
+    </visual>
+    <visual name="visual_link6_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link6_1.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link6_2">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link6_2.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link6_3">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link6_3.obj" />
+      </geometry>
+      <material name="mj_gray">
+        <color rgba="0.863156 0.863156 0.863157 1" />
+      </material>
+    </visual>
+    <visual name="visual_link6_4">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link6_4.obj" />
+      </geometry>
+      <material name="mj_button_red">
+        <color rgba="0.520996 0.008023 0.013702 1" />
+      </material>
+    </visual>
+    <visual name="visual_link6_5">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link6_5.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link6_6">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link6_6.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+    <visual name="visual_link6_7">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link6_7.obj" />
+      </geometry>
+      <material name="mj_button_blue">
+        <color rgba="0.024157 0.445201 0.737911 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="fr3_joint6" type="revolute">
+    <origin rpy="1.570796326794897 0 0" xyz="0 0 0" />
+    <parent link="fr3_link5" />
+    <child link="fr3_link6" />
+    <axis xyz="0 0 1" />
+    <limit effort="12.0" lower="0.4398" upper="4.6216" velocity="4.18" />
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="0.4398" soft_upper_limit="4.6216" />
+    <position_based_velocity_limits deceleration_limit="5.5" velocity_offset="0.4885" />
+    <dynamics D="1" K="7000" damping="0.003" friction="0.2" gear_ratio="80.0" motor_inertia="3.211626e-05" mu_coulomb="0" mu_viscous="16" />
+  </joint>
+  <link name="fr3_link7">
+    <collision name="fr3_link7_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/link7.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0045225817 0.0086261921 -0.0161633251" />
+      <mass value="0.6271432862" />
+      <inertia ixx="0.00021092389150104718" ixy="-2.433299114461931e-05" ixz="4.564480393778983e-05" iyy="0.00017718568002411474" iyz="8.744070223226438e-05" izz="5.993190599659971e-05" />
+    </inertial>
+    <visual name="visual_link7_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link7_0.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+    <visual name="visual_link7_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link7_1.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link7_2">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link7_2.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="visual_link7_3">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/link7_3.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="fr3_joint7" type="revolute">
+    <origin rpy="1.570796326794897 0 0" xyz="0.088 0 0" />
+    <parent link="fr3_link6" />
+    <child link="fr3_link7" />
+    <axis xyz="0 0 1" />
+    <limit effort="12.0" lower="-3.0508" upper="3.0508" velocity="5.26" />
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-3.0508" soft_upper_limit="3.0508" />
+    <position_based_velocity_limits deceleration_limit="17.0" velocity_offset="0.4592" />
+    <dynamics D="1" K="7000" damping="0.003" friction="0.2" gear_ratio="80.0" motor_inertia="3.211626e-05" mu_coulomb="0" mu_viscous="16" />
+  </joint>
+  <link name="fr3_link8" />
+  <joint name="fr3_joint8" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.107" />
+    <parent link="fr3_link7" />
+    <child link="fr3_link8" />
+  </joint>
+  <joint name="fr3_hand_joint" type="fixed">
+    <parent link="fr3_link8" />
+    <child link="fr3_hand" />
+    <origin rpy="0 0 -0.7853981633974483" xyz="0 0 0" />
+  </joint>
+  <link name="fr3_hand">
+    <collision name="fr3_hand_collision">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/meshes/franka_collision/hand.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.0000376 0.0119128 0.0207260" />
+      <mass value="0.6544" />
+      <inertia ixx="0.00186" ixy="0.0" ixz="0.0" iyy="0.0003" iyz="-2e-05" izz="0.00174" />
+    </inertial>
+    <visual name="fr3_hand_visual_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_hand_0.obj" />
+      </geometry>
+      <material name="mj_off_white">
+        <color rgba="0.901961 0.921569 0.929412 1" />
+      </material>
+    </visual>
+    <visual name="fr3_hand_visual_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_hand_1.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+    <visual name="fr3_hand_visual_2">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_hand_2.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+    <visual name="fr3_hand_visual_3">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_hand_3.obj" />
+      </geometry>
+      <material name="mj_white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <visual name="fr3_hand_visual_4">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_hand_4.obj" />
+      </geometry>
+      <material name="mj_off_white">
+        <color rgba="0.901961 0.921569 0.929412 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="fr3_hand_tcp" />
+  <joint name="fr3_hand_tcp_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.1034" />
+    <parent link="fr3_hand" />
+    <child link="fr3_hand_tcp" />
+  </joint>
+  <link name="fr3_leftfinger">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 18.5e-3 11e-3" />
+      <geometry>
+        <box size="22e-3 15e-3 20e-3" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 6.8e-3 2.2e-3" />
+      <geometry>
+        <box size="22e-3 8.8e-3 3.8e-3" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0.5235987755982988 0 0" xyz="0 15.9e-3 28.35e-3" />
+      <geometry>
+        <box size="17.5e-3 7e-3 23.5e-3" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 7.58e-3 45.25e-3" />
+      <geometry>
+        <box size="17.5e-3 15.2e-3 18.5e-3" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0.0152850 0.0219675" />
+      <mass value="0.0291" />
+      <inertia ixx="8.49e-06" ixy="0.0" ixz="0.0" iyy="8.53e-06" iyz="-1.06e-06" izz="1.77e-06" />
+    </inertial>
+    <visual name="fr3_leftfinger_visual_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_finger_0.obj" />
+      </geometry>
+      <material name="mj_off_white">
+        <color rgba="0.901961 0.921569 0.929412 1" />
+      </material>
+    </visual>
+    <visual name="fr3_leftfinger_visual_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_finger_1.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="fr3_rightfinger">
+    <collision>
+      <origin rpy="0 0 0" xyz="0 18.5e-3 11e-3" />
+      <geometry>
+        <box size="22e-3 15e-3 20e-3" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 6.8e-3 2.2e-3" />
+      <geometry>
+        <box size="22e-3 8.8e-3 3.8e-3" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="-0.5235987755982988 0 3.141592653589793" xyz="0 15.9e-3 28.35e-3" />
+      <geometry>
+        <box size="17.5e-3 7e-3 23.5e-3" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 7.58e-3 45.25e-3" />
+      <geometry>
+        <box size="17.5e-3 15.2e-3 18.5e-3" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0.0152850 0.0219675" />
+      <mass value="0.0291" />
+      <inertia ixx="8.49e-06" ixy="0.0" ixz="0.0" iyy="8.53e-06" iyz="-1.06e-06" izz="1.77e-06" />
+    </inertial>
+    <visual name="fr3_rightfinger_visual_0">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_finger_0.obj" />
+      </geometry>
+      <material name="mj_off_white">
+        <color rgba="0.901961 0.921569 0.929412 1" />
+      </material>
+    </visual>
+    <visual name="fr3_rightfinger_visual_1">
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/fr3_finger_1.obj" />
+      </geometry>
+      <material name="mj_black">
+        <color rgba=".2 .2 .2 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="fr3_finger_joint1" type="prismatic">
+    <parent link="fr3_hand" />
+    <child link="fr3_leftfinger" />
+    <origin rpy="0 0 0" xyz="0 0 0.0584" />
+    <axis xyz="0 1 0" />
+    <limit effort="100" lower="0.0" upper="0.04" velocity="0.2" />
+    <dynamics damping="0.3" />
+  </joint>
+  <joint name="fr3_finger_joint2" type="prismatic">
+    <parent link="fr3_hand" />
+    <child link="fr3_rightfinger" />
+    <origin rpy="0 0 3.141592653589793" xyz="0 0 0.0584" />
+    <axis xyz="0 1 0" />
+    <limit effort="100" lower="0.0" upper="0.04" velocity="0.2" />
+    <mimic joint="fr3_finger_joint1" />
+    <dynamics damping="0.3" />
+  </joint>
+  <material name="fr3_d435i_mount_gray">
+    <color rgba="0.25 0.28 0.30 1" />
+  </material>
+  <material name="fr3_hand_opaque">
+    <color rgba="0.92 0.92 0.90 1" />
+  </material>
+  <material name="d435i_opaque">
+    <color rgba="0.06 0.06 0.06 1" />
+  </material>
+  <material name="d435i_body_opaque">
+    <color rgba="0.65 0.67 0.68 1" />
+  </material>
+  <material name="d435i_lens_opaque">
+    <color rgba="0.01 0.02 0.025 1" />
+  </material>
+  <link name="fr3_d435i_mount">
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/models/FR3_D435i_mount.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="fr3_d435i_mount_gray" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/models/FR3_D435i_mount.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.20" />
+      <inertia ixx="0.0004" ixy="0" ixz="0" iyy="0.0004" iyz="0" izz="0.0004" />
+    </inertial>
+  </link>
+  <joint name="fr3_d435i_mount_joint" type="fixed">
+    <parent link="fr3_hand" />
+    <child link="fr3_d435i_mount" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <link name="d435i_link">
+    <collision>
+      <geometry>
+        <box size=".02505 .09 .025" />
+      </geometry>
+      <origin xyz="0 -.0175 0" />
+      <origin xyz="0 -.0175 0" />
+      <origin xyz="0 -.0175 0" />
+      <origin xyz="0 -.0175 0" />
+      <origin xyz="0 -.0175 0" />
+      <origin xyz="0 -.0175 0" />
+      <origin xyz="0 -.0175 0" />
+    </collision>
+    <inertial>
+      <mass value="0.09" />
+      <inertia ixx="0.00002" ixy="0" ixz="0" iyy="0.00007" iyz="0" izz="0.00007" />
+    </inertial>
+    <visual name="rs_visual_d435i_0">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_0.obj" />
+      </geometry>
+      <material name="mj_rs_IR_Lens">
+        <color rgba="0.035601 0.035601 0.035601 1" />
+      </material>
+    </visual>
+    <visual name="rs_visual_d435i_1">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_1.obj" />
+      </geometry>
+      <material name="mj_rs_IR_Emitter_Lens">
+        <color rgba="0.287440 0.665387 0.327778 1" />
+      </material>
+    </visual>
+    <visual name="rs_visual_d435i_2">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_2.obj" />
+      </geometry>
+      <material name="mj_rs_IR_Rim">
+        <color rgba="0.799102 0.806952 0.799103 1" />
+      </material>
+    </visual>
+    <visual name="rs_visual_d435i_3">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_3.obj" />
+      </geometry>
+      <material name="mj_rs_IR_Lens">
+        <color rgba="0.035601 0.035601 0.035601 1" />
+      </material>
+    </visual>
+    <visual name="rs_visual_d435i_4">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_4.obj" />
+      </geometry>
+      <material name="mj_rs_Cameras_Gray">
+        <color rgba="0.296138 0.296138 0.296138 1" />
+      </material>
+    </visual>
+    <visual name="rs_visual_d435i_5">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_5.obj" />
+      </geometry>
+      <material name="mj_rs_Black_Acrylic">
+        <color rgba="0.070360 0.070360 0.070360 1" />
+      </material>
+    </visual>
+    <visual name="rs_visual_d435i_6">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_6.obj" />
+      </geometry>
+      <material name="mj_rs_Black_Acrylic">
+        <color rgba="0.070360 0.070360 0.070360 1" />
+      </material>
+    </visual>
+    <visual name="rs_visual_d435i_7">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_7.obj" />
+      </geometry>
+      <material name="mj_rs_RGB_Pupil">
+        <color rgba="0.087140 0.002866 0.009346 1" />
+      </material>
+    </visual>
+    <visual name="rs_visual_d435i_8">
+      <origin xyz="0.0043 -0.0175 0" rpy="1.57079632679 0 1.57079632679" />
+      <geometry>
+        <mesh filename="package://fr3_d435i_wrist_camera_mount/mujoco_fr3/assets/d435i_8.obj" />
+      </geometry>
+      <material name="mj_rs_Metal_Casing">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="d435i_mount_joint" type="fixed">
+    <parent link="fr3_d435i_mount" />
+    <child link="d435i_link" />
+    <origin xyz="0.0635832488467 0.04912 0.0378225720135" rpy="0 -2.00712863979 0" />
+  </joint>
+  <link name="d435i_color_frame" />
+  <joint name="d435i_color_frame_joint" type="fixed">
+    <parent link="d435i_link" />
+    <child link="d435i_color_frame" />
+    <origin xyz="0 .015 0" />
+  </joint>
+  <link name="d435i_depth_frame" />
+  <joint name="d435i_depth_frame_joint" type="fixed">
+    <parent link="d435i_link" />
+    <child link="d435i_depth_frame" />
+    <origin xyz="0 0 0" />
+  </joint>
+  <link name="d435i_imu_frame" />
+  <joint name="d435i_imu_frame_joint" type="fixed">
+    <parent link="d435i_link" />
+    <child link="d435i_imu_frame" />
+    <origin xyz="-0.015 0 0" />
+  </joint>
+  <link name="d435i_color_optical_frame" />
+  <joint name="d435i_color_optical_frame_joint" type="fixed">
+    <parent link="d435i_color_frame" />
+    <child link="d435i_color_optical_frame" />
+    <origin rpy="-1.57079632679 0 -1.57079632679" />
+  </joint>
+  <link name="d435i_depth_optical_frame" />
+  <joint name="d435i_depth_optical_frame_joint" type="fixed">
+    <parent link="d435i_depth_frame" />
+    <child link="d435i_depth_optical_frame" />
+    <origin rpy="-1.57079632679 0 -1.57079632679" />
+  </joint>
+</robot>

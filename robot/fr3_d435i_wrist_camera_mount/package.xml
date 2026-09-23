@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<package format="3">
+  <name>fr3_d435i_wrist_camera_mount</name>
+  <version>0.1.0</version>
+  <description>Official Franka FR3 with the FR3-D435i wrist camera mount.</description>
+  <maintainer email="user@localhost">user</maintainer>
+  <license>CC-BY-4.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

@@ -1,0 +1,28 @@
+name: franka_toolkit
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.16
+  - pip
+  - pyyaml=6.0.2
+  - requests=2.32.3
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu124
+      - torch==2.4.0+cu124
+      - torchvision==0.19.0
+      - numpy==1.26.0
+      - scipy==1.11.4
+      - opencv-python==4.10.0.84
+      - open3d==0.17.0
+      - pyrealsense2==2.53.1.4623
+      - pyspacemouse==1.1.4
+      - pyquaternion==0.9.9
+      - h5py==3.13.0
+      - matplotlib==3.10.5
+      - tqdm==4.67.1
+      - termcolor==3.3.0
+      - ultralytics==8.3.173
+      - cprint==1.2.2

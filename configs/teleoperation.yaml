@@ -1,0 +1,39 @@
+# Shared SpaceMouse/Franka teleoperation settings.
+# Edit this file for hardware tuning; pass another file with --config when needed.
+
+server_url: http://192.168.1.11:8000/
+position_scale: 0.10
+rotation_scale: 0.20
+gripper_step: 0.005
+gripper_min: 0.0
+gripper_max: 0.08
+deadzone: 0.30
+control_hz: 20.0
+reset_on_start: false
+
+# SpaceMouse button indices. On the current device: button 0 = right/close,
+# button 1 = left/open. A button is active for as long as it is held.
+open_button: 1
+close_button: 0
+
+# Native LeRobot collector. Fill these three values before running it without
+# command-line overrides.
+repo_id: ""
+task: ""
+top_serial: ""
+wrist_serial: ""
+camera_width: 1280
+camera_height: 720
+camera_fps: 30
+
+# Legacy NPZ collector (used with --legacy-npz).
+# Detected on 2026-09-22: Intel RealSense D435I.
+legacy_camera_serial: "261622077687"
+legacy_camera_width: 640
+legacy_camera_height: 480
+legacy_camera_fps: 30
+camera_init_retries: 3
+camera_retry_delay: 2.0
+data_save_frequency: 15.0
+reset_duration: 3.0
+reset_steps: 15

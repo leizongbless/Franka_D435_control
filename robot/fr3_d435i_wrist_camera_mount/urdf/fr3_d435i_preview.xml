@@ -1,0 +1,39 @@
+﻿<mujoco model="fr3_d435i_preview"><visual><global offwidth="1000" offheight="800"/></visual>
+  <compiler angle="radian" meshdir="../models"/>
+  <option gravity="0 0 -9.81"/>
+  <asset>
+    <mesh name="wrist_mount" file="FR3_D435i_mount.obj" scale="0.001 0.001 0.001"/>
+    <material name="white" rgba="0.82 0.82 0.80 1"/><material name="dark" rgba="0.05 0.05 0.05 1"/><material name="mount" rgba="0.25 0.28 0.30 1"/><material name="glass" rgba="0.05 0.25 0.35 1"/>
+  </asset>
+  <worldbody><light name="key" pos="1 -1 2" dir="-1 1 -1" diffuse="1 1 1" specular="0.4 0.4 0.4"/><light name="fill" pos="-1 -1 1" dir="1 1 -0.5" diffuse="0.6 0.6 0.6"/>
+    <geom type="plane" size="2 2 .01" rgba="0.16 0.16 0.16 1"/>
+    <body name="base" pos="0 0 .1"><geom type="cylinder" size=".17 .1" material="white"/>
+      <body name="link1" pos="0 0 .2"><joint name="j1" type="hinge" axis="0 0 1"/><geom type="cylinder" fromto="0 0 0 0 0 .4" size=".07" material="white"/>
+        <body name="link2" pos="0 0 .4" euler="-1.5708 0 0"><joint name="j2" type="hinge" axis="0 0 1"/><geom type="box" pos="0 0 -.2" size=".07 .07 .2" material="white"/>
+          <body name="link3" pos="0 0 -.4" euler="1.5708 0 0"><joint name="j3" type="hinge" axis="0 0 1"/><geom type="capsule" fromto="0 0 0 .4 0 0" size=".055" material="white"/>
+            <body name="link4" pos=".4 0 0" euler="1.5708 0 0"><joint name="j4" type="hinge" axis="0 0 1"/><geom type="box" pos="0 0 .2" size=".06 .06 .2" material="white"/>
+              <body name="link5" pos="0 0 .4" euler="-1.5708 0 0"><joint name="j5" type="hinge" axis="0 0 1"/><geom type="capsule" fromto="0 0 0 .4 0 0" size=".05" material="white"/>
+                <body name="link6" pos=".4 0 0" euler="1.5708 0 0"><joint name="j6" type="hinge" axis="0 0 1"/><geom type="box" pos="0 0 .13" size=".05 .05 .13" material="white"/>
+                  <body name="link7" pos="0 0 .26" euler="-1.5708 0 0"><joint name="j7" type="hinge" axis="0 0 1"/><geom type="cylinder" pos="0 0 .1" size=".06 .1" material="white"/>
+                    <body name="hand" pos="0 0 .2"><geom type="box" pos="0 0 .1" size=".055 .055 .1" material="dark"/>
+                      <body name="gripper" pos="0 0 .2"><geom type="box" pos="0 0 .08" size=".04 .04 .08" material="dark"/>
+                        <body name="mount" pos="0 0 .22"><geom type="mesh" mesh="wrist_mount" material="mount" pos="-.055 -.050 -.011"/>
+                          <body name="d435i" pos=".055 0 .055"><geom type="box" size=".045 .0125 .0125" material="dark"/><geom type="cylinder" fromto=".045 -.013 0 .046 -.013 0" size=".004" material="glass"/>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <camera name="view" pos="2 -3 1.8" mode="targetbody" target="d435i"/>
+  </worldbody>
+</mujoco>
+
+
+

@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+
+# Runtime collection outputs
+data/
+*.npz
+*.mp4
+*.h5
+*.zarr/
+*.log

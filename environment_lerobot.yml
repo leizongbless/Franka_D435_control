@@ -1,0 +1,15 @@
+name: franka_lerobot
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - pyyaml=6.0.2
+  - scipy
+  - requests
+  - pip:
+      - lerobot[dataset]==0.6.1
+      - pyrealsense2==2.56.5.9235
+      - pyspacemouse==2.1.0
+      - pyquaternion==0.9.9

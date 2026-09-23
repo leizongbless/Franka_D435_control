@@ -1,0 +1,6 @@
+﻿cmake_minimum_required(VERSION 3.8)
+project(fr3_d435i_wrist_camera_mount)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY models urdf realsense2_description mujoco_fr3 licenses DESTINATION share/${PROJECT_NAME})
+install(FILES URDF_USAGE.md README.md render_menagerie.py DESTINATION share/${PROJECT_NAME})
+ament_package()
